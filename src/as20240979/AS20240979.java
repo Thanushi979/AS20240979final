@@ -21,7 +21,7 @@ public class AS20240979 {
        int choice;
 
         do {
-            System.out.println("\n===== City Management System =====");
+            System.out.println("\n=== City Management System ===");
             System.out.println("1. Add a new city");
             System.out.println("2. Rename a city");
             System.out.println("3. Remove a city");
@@ -42,9 +42,9 @@ public class AS20240979 {
         } while (choice != 0);
     }
 
-    // -------------------------------
+    
     // Add a new city
-    // -------------------------------
+   
     static void addCity() {
         if (cityCount >= MAX_CITIES) {
             System.out.println("City limit reached! Cannot add more cities.");
@@ -69,9 +69,9 @@ public class AS20240979 {
         System.out.println(newCity + " has been added successfully.");
     }
 
-    // -------------------------------
+    
     // Rename a city
-    // -------------------------------
+    
     static void renameCity() {
         if (cityCount == 0) {
             System.out.println("No cities to rename.");
@@ -105,9 +105,9 @@ public class AS20240979 {
         System.out.println("City renamed from " + oldName + " to " + newName + ".");
     }
 
-    // -------------------------------
+  
     // Remove a city
-    // -------------------------------
+    
     static void removeCity() {
         if (cityCount == 0) {
             System.out.println("No cities to remove.");
@@ -132,9 +132,9 @@ public class AS20240979 {
         System.out.println(cityToRemove + " has been removed successfully.");
     }
 
-    // -------------------------------
+    
     // Display all cities
-    // -------------------------------
+   
     static void displayCities() {
         if (cityCount == 0) {
             System.out.println("No cities have been added yet.");
@@ -147,9 +147,9 @@ public class AS20240979 {
         }
     }
 
-    // -------------------------------
+  
     // Find city index (Helper method)
-    // -------------------------------
+    
     static int findCityIndex(String cityName) {
         for (int i = 0; i < cityCount; i++) {
             if (cities[i].equalsIgnoreCase(cityName)) {
@@ -159,9 +159,9 @@ public class AS20240979 {
         return -1;
     }
 
-    // -------------------------------
+
     // Safe integer input
-    // -------------------------------
+   
     static int getIntInput() {
         try {
             return Integer.parseInt(scanner.nextLine());
