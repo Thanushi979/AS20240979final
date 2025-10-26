@@ -311,6 +311,8 @@ public class AS20240979 {
         double fuelCost = fuelUsed * F;
         double totalCost = deliveryCost + fuelCost;
         double profit = deliveryCost * 0.25;
+        double customerCharge = totalCost + profit;
+
         
         
         System.out.println("\n===== DELIVERY COST ESTIMATION =====");
@@ -325,6 +327,7 @@ public class AS20240979 {
         System.out.printf("Fuel Cost: %.2f LKR\n", fuelCost);
         System.out.printf("Total Operational Cost: %.2f LKR\n", totalCost);
         System.out.printf("Profit (25%%): %.2f LKR\n", profit);
+        System.out.printf("Customer Charge: %.2f LKR\n", customerCharge);
         
         
         
