@@ -5,7 +5,6 @@
 package as20240979;
 
 import java.util.Scanner;
-
 /**
  *
  * @author BEST
@@ -14,10 +13,12 @@ public class AS20240979 {
 
   
     static final int MAX_CITIES = 30;          // Maximum number of cities
+    static final int MAX_DELIVERIES = 50;
     static String[] cities = new String[MAX_CITIES];
+    static int[][] distance = new int[MAX_CITIES][MAX_CITIES];
     static int cityCount = 5;                  // Start with 5 predefined cities
     static Scanner scanner = new Scanner(System.in);
-    static int[][] distance = new int[MAX_CITIES][MAX_CITIES];
+    
     
      // Vehicle data 
     static String[] vehicleTypes = {"Van", "Truck", "Lorry"};
@@ -26,6 +27,14 @@ public class AS20240979 {
     static double[] avgSpeed = {60, 50, 45};            // km/h
     static double[] fuelEfficiency = {12, 6, 4};        // km per litre
     static final double fuel_price = 310.0;             // LKR per liter
+    
+    // Delivery records
+    static String[] deliveryFrom = new String[MAX_DELIVERIES];
+    static String[] deliveryTo = new String[MAX_DELIVERIES];
+    static String[] deliveryVehicle = new String[MAX_DELIVERIES];
+    static double[] deliveryWeight = new double[MAX_DELIVERIES];
+    static double[] deliveryCharge = new double[MAX_DELIVERIES];
+    static int deliveryCount = 0;
 
 
     public static void main(String[] args) {
@@ -34,6 +43,18 @@ public class AS20240979 {
         cities[2] = "Galle";
         cities[3] = "Jaffna";
         cities[4] = "Matara";
+        
+        int[][] d = {
+                {0, 120, 115, 410, 160},
+                {120, 0, 200, 300, 250},
+                {115, 200, 0, 390, 180},
+                {410, 300, 390, 0, 500},
+                {160, 250, 180, 500, 0}
+        };
+        for (int i = 0; i < cityCount; i++)
+            for (int j = 0; j < cityCount; j++)
+                distance[i][j] = d[i][j];
+    
 
         int choice;
         do {
@@ -46,6 +67,7 @@ public class AS20240979 {
             System.out.println("6. Display distance table");
             System.out.println("7. Display vehicle types");
             System.out.println("8. Create a delivery request and calculate cost");
+            System.out.println("9. View delivery records");
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
             choice = getIntInput();
@@ -59,6 +81,7 @@ public class AS20240979 {
                 case 6 -> displayDistanceTable();
                 case 7 -> displayVehicles();
                 case 8 -> handleDeliveryRequest();
+                case 9 -> displayDeliveries();
                 case 0 -> System.out.println("Exiting City Management...");
                 default -> System.out.println("Invalid choice. Please try again.");
             }
@@ -331,9 +354,52 @@ public class AS20240979 {
         System.out.printf("Estimated Delivery Time: %.2f hours\n", time);
         System.out.println("=====================================");
         
-        
-        
+        recordDelivery(cities[src], cities[dest], vehicleTypes[v], weight, customerCharge);
     }
+        //Delivery Records
+
+    static void recordDelivery(String from, String to, String vehicle, double weight, double charge) {
+        if (deliveryCount >= MAX_DELIVERIES) {
+            System.out.println("Delivery list full!");
+            return;
+        }
+        deliveryFrom[deliveryCount] = from;
+        deliveryTo[deliveryCount] = to;
+        deliveryVehicle[deliveryCount] = vehicle;
+        deliveryWeight[deliveryCount] = weight;
+        deliveryCharge[deliveryCount] = charge;
+        deliveryCount++;
+        System.out.println(" Delivery recorded successfully!");
+    }
+
+        double total = 0;
+    
+
+
+static void displayDeliveries() {
+    if (deliveryCount == 0) {
+        System.out.println("No deliveries recorded yet.");
+        return;
+    }
+
+    System.out.println("\n===== DELIVERY RECORDS =====");
+    System.out.printf("%-5s %-15s %-15s %-10s %-10s %-15s\n",
+            "No", "From", "To", "Vehicle", "Weight(kg)", "Charge(LKR)");
+    System.out.println("-------------------------------------------------------------");
+
+    for (int i = 0; i < deliveryCount; i++) {
+        System.out.printf("%-5d %-15s %-15s %-10s %-10.2f %-15.2f\n",
+                (i + 1),
+                deliveryFrom[i],
+                deliveryTo[i],
+                deliveryVehicle[i],
+                deliveryWeight[i],
+                deliveryCharge[i]);
+         
+    }
+    System.out.println("-------------------------------------------------------------");
+    
+}
 
 
     // Find city index (Helper method)
