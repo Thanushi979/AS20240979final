@@ -18,6 +18,14 @@ public class AS20240979 {
     static int cityCount = 5;                  // Start with 5 predefined cities
     static Scanner scanner = new Scanner(System.in);
     static int[][] distance = new int[MAX_CITIES][MAX_CITIES];
+    
+     // Vehicle data 
+    static String[] vehicleTypes = {"Van", "Truck", "Lorry"};
+    static int[] capacity = {1000, 5000, 10000};        // in kg
+    static double[] ratePerKm = {30, 40, 80};           // LKR per km
+    static double[] avgSpeed = {60, 50, 45};            // km/h
+    static double[] fuelEfficiency = {12, 6, 4};        // km per litre
+
 
     public static void main(String[] args) {
         cities[0] = "Colombo";
@@ -35,6 +43,7 @@ public class AS20240979 {
             System.out.println("4. Display all cities");
             System.out.println("5. Input or Edit distance between cities");
             System.out.println("6. Display distance table");
+            System.out.println("7. Display vehicle types");
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
             choice = getIntInput();
@@ -46,6 +55,7 @@ public class AS20240979 {
                 case 4 -> displayCities();
                 case 5 -> editDistance();
                 case 6 -> displayDistanceTable();
+                case 7 -> displayVehicles();
                 case 0 -> System.out.println("Exiting City Management...");
                 default -> System.out.println("Invalid choice. Please try again.");
             }
@@ -225,7 +235,20 @@ public class AS20240979 {
             System.out.println();
         }
     }
+    
+    // Vehicle Management
+    
+    static void displayVehicles() {
+        System.out.println("\n===== Vehicle Types =====");
+        System.out.printf("%-10s %-15s %-15s %-15s %-15s\n",
+                "Type", "Capacity(kg)", "Rate/km(LKR)", "AvgSpeed(km/h)", "FuelEff(km/l)");
+        System.out.println("---------------------------------------------------------------");
 
+        for (int i = 0; i < vehicleTypes.length; i++) {
+            System.out.printf("%-10s %-15d %-15.2f %-15.2f %-15.2f\n",
+                    vehicleTypes[i], capacity[i], ratePerKm[i], avgSpeed[i], fuelEfficiency[i]);
+        }
+    }
     
     // Find city index (Helper method)
    
