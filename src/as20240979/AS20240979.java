@@ -353,6 +353,7 @@ public class AS20240979 {
         System.out.printf("Customer Charge: %.2f LKR\n", customerCharge);
         System.out.printf("Estimated Delivery Time: %.2f hours\n", time);
         System.out.println("=====================================");
+      
         
         recordDelivery(cities[src], cities[dest], vehicleTypes[v], weight, customerCharge);
     }
@@ -370,6 +371,7 @@ public class AS20240979 {
         deliveryCharge[deliveryCount] = charge;
         deliveryCount++;
         System.out.println(" Delivery recorded successfully!");
+         System.out.println("if you want to delivery summary enter 9.Thank you.");
     }
 
         double total = 0;
