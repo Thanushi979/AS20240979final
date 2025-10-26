@@ -44,6 +44,7 @@ public class AS20240979 {
             System.out.println("5. Input or Edit distance between cities");
             System.out.println("6. Display distance table");
             System.out.println("7. Display vehicle types");
+            System.out.println("8. Create a delivery request");
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
             choice = getIntInput();
@@ -56,6 +57,7 @@ public class AS20240979 {
                 case 5 -> editDistance();
                 case 6 -> displayDistanceTable();
                 case 7 -> displayVehicles();
+                case 8 -> handleDeliveryRequest();
                 case 0 -> System.out.println("Exiting City Management...");
                 default -> System.out.println("Invalid choice. Please try again.");
             }
@@ -250,6 +252,41 @@ public class AS20240979 {
         }
     }
     
+    // Delivery Request Handling
+    
+    static void handleDeliveryRequest() {
+        if (cityCount < 2) {
+            System.out.println("Please add at least two cities first!");
+            return;
+        }
+
+        displayCities();
+        System.out.print("Enter source city index: ");
+        int src = getIntInput() - 1;
+        System.out.print("Enter destination city index: ");
+        int dest = getIntInput() - 1;
+
+        if (src < 0 || dest < 0 || src >= cityCount || dest >= cityCount) {
+            System.out.println("Invalid city index!");
+            return;
+        }
+        if (src == dest) {
+            System.out.println("Source and destination cannot be the same!");
+            return;
+        }
+        if (distance[src][dest] <= 0) {
+            System.out.println("Distance between these cities is not set yet!");
+            return;
+        }
+
+        
+        System.out.println("\n===== Delivery Request Summary =====");
+        System.out.println("From: " + cities[src]);
+        System.out.println("To: " + cities[dest]);
+        System.out.println("Distance: " + distance[src][dest] + " km");
+       
+    }
+    
     // Find city index (Helper method)
    
     static int findCityIndex(String cityName) {
@@ -270,4 +307,5 @@ public class AS20240979 {
         }
     }
 }
+    
   
