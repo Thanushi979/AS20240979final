@@ -12,23 +12,28 @@ import java.util.Scanner;
  */
 public class AS20240979 {
 
-    static final int MAX_CITIES = 30;     // Maximum number of cities
+  
+    static final int MAX_CITIES = 30;          // Maximum number of cities
     static String[] cities = new String[MAX_CITIES];
-    static int cityCount = 0;
+    static int cityCount = 5;                  // Start with 5 predefined cities
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-       int choice;
+        cities[0] = "Colombo";
+        cities[1] = "Kandy";
+        cities[2] = "Galle";
+        cities[3] = "Jaffna";
+        cities[4] = "Matara";
 
+        int choice;
         do {
-            System.out.println("\n=== City Management System ===");
+            System.out.println("\n===== City Management System =====");
             System.out.println("1. Add a new city");
             System.out.println("2. Rename a city");
             System.out.println("3. Remove a city");
             System.out.println("4. Display all cities");
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
-
             choice = getIntInput();
 
             switch (choice) {
@@ -42,8 +47,7 @@ public class AS20240979 {
         } while (choice != 0);
     }
 
-    
-    // Add a new city
+        // Add a new city
    
     static void addCity() {
         if (cityCount >= MAX_CITIES) {
@@ -64,14 +68,13 @@ public class AS20240979 {
             return;
         }
 
-        cities[cityCount] = newCity;
-        cityCount++;
+        cities[cityCount++] = newCity;
         System.out.println(newCity + " has been added successfully.");
     }
 
     
     // Rename a city
-    
+   
     static void renameCity() {
         if (cityCount == 0) {
             System.out.println("No cities to rename.");
@@ -97,7 +100,7 @@ public class AS20240979 {
         }
 
         if (findCityIndex(newName) != -1) {
-            System.out.println("This new city name already exists!");
+            System.out.println("This city name already exists!");
             return;
         }
 
@@ -105,7 +108,7 @@ public class AS20240979 {
         System.out.println("City renamed from " + oldName + " to " + newName + ".");
     }
 
-  
+    
     // Remove a city
     
     static void removeCity() {
@@ -134,7 +137,7 @@ public class AS20240979 {
 
     
     // Display all cities
-   
+    
     static void displayCities() {
         if (cityCount == 0) {
             System.out.println("No cities have been added yet.");
@@ -147,9 +150,9 @@ public class AS20240979 {
         }
     }
 
-  
-    // Find city index (Helper method)
     
+    // Find city index (Helper method)
+   
     static int findCityIndex(String cityName) {
         for (int i = 0; i < cityCount; i++) {
             if (cities[i].equalsIgnoreCase(cityName)) {
@@ -159,7 +162,7 @@ public class AS20240979 {
         return -1;
     }
 
-
+    
     // Safe integer input
    
     static int getIntInput() {
@@ -169,4 +172,4 @@ public class AS20240979 {
             return -1;
         }
     }
-}
+  }
