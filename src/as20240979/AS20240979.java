@@ -278,12 +278,32 @@ public class AS20240979 {
             System.out.println("Distance between these cities is not set yet!");
             return;
         }
+         System.out.print("Enter weight (kg): ");
+        double weight = getDoubleInput();
+        if (weight <= 0) {
+            System.out.println("Invalid weight!");
+            return;
+        }
 
+        displayVehicles();
+        System.out.print("Select vehicle (1=Van, 2=Truck, 3=Lorry): ");
+        int v = getIntInput() - 1;
+        if (v < 0 || v >= vehicleTypes.length) {
+            System.out.println("Invalid vehicle choice!");
+            return;
+        }
+        if (weight > capacity[v]) {
+            System.out.println("Weight exceeds vehicle capacity!");
+            return;
+        }
         
         System.out.println("\n===== Delivery Request Summary =====");
         System.out.println("From: " + cities[src]);
         System.out.println("To: " + cities[dest]);
         System.out.println("Distance: " + distance[src][dest] + " km");
+        System.out.println("Vehicle: " + vehicleTypes[v]);
+        System.out.println("Weight: " + weight + " kg");
+        System.out.println("Request recorded successfully (ready for cost estimation).");
        
     }
     
@@ -306,6 +326,10 @@ public class AS20240979 {
             return -1;
         }
     }
+    static double getDoubleInput() {
+        try { return Double.parseDouble(scanner.nextLine()); }
+        catch (Exception e) { return -1; }
+}
 }
     
   
