@@ -328,6 +328,8 @@ public class AS20240979 {
         System.out.printf("Total Operational Cost: %.2f LKR\n", totalCost);
         System.out.printf("Profit (25%%): %.2f LKR\n", profit);
         System.out.printf("Customer Charge: %.2f LKR\n", customerCharge);
+        System.out.printf("Estimated Delivery Time: %.2f hours\n", time);
+        System.out.println("=====================================");
         
         
         
