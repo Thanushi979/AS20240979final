@@ -25,6 +25,7 @@ public class AS20240979 {
     static double[] ratePerKm = {30, 40, 80};           // LKR per km
     static double[] avgSpeed = {60, 50, 45};            // km/h
     static double[] fuelEfficiency = {12, 6, 4};        // km per litre
+    static final double fuel_price = 310.0;             // LKR per liter
 
 
     public static void main(String[] args) {
@@ -44,7 +45,7 @@ public class AS20240979 {
             System.out.println("5. Input or Edit distance between cities");
             System.out.println("6. Display distance table");
             System.out.println("7. Display vehicle types");
-            System.out.println("8. Create a delivery request");
+            System.out.println("8. Create a delivery request and calculate cost");
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
             choice = getIntInput();
@@ -297,16 +298,29 @@ public class AS20240979 {
             return;
         }
         
-        System.out.println("\n===== Delivery Request Summary =====");
+        double D = distance[src][dest];
+        double W = weight;
+        double R = ratePerKm[v];
+        double S = avgSpeed[v];
+        double E = fuelEfficiency[v];
+        double F = fuel_price;
+
+        double deliveryCost = D * R * (1 + W / 10000);
+        
+        
+        System.out.println("\n===== DELIVERY COST ESTIMATION =====");
         System.out.println("From: " + cities[src]);
         System.out.println("To: " + cities[dest]);
-        System.out.println("Distance: " + distance[src][dest] + " km");
         System.out.println("Vehicle: " + vehicleTypes[v]);
-        System.out.println("Weight: " + weight + " kg");
-        System.out.println("Request recorded successfully (ready for cost estimation).");
-       
+        System.out.println("Distance: " + D + " km");
+        System.out.println("Weight: " + W + " kg");
+        System.out.println("--------------------------------------");
+        System.out.printf("Base Delivery Cost: %.2f LKR\n", deliveryCost);
+        
+        
     }
-    
+
+
     // Find city index (Helper method)
    
     static int findCityIndex(String cityName) {
