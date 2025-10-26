@@ -17,6 +17,7 @@ public class AS20240979 {
     static String[] cities = new String[MAX_CITIES];
     static int cityCount = 5;                  // Start with 5 predefined cities
     static Scanner scanner = new Scanner(System.in);
+    static int[][] distance = new int[MAX_CITIES][MAX_CITIES];
 
     public static void main(String[] args) {
         cities[0] = "Colombo";
@@ -32,6 +33,8 @@ public class AS20240979 {
             System.out.println("2. Rename a city");
             System.out.println("3. Remove a city");
             System.out.println("4. Display all cities");
+            System.out.println("5. Input or Edit distance between cities");
+            System.out.println("6. Display distance table");
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
             choice = getIntInput();
@@ -41,6 +44,8 @@ public class AS20240979 {
                 case 2 -> renameCity();
                 case 3 -> removeCity();
                 case 4 -> displayCities();
+                case 5 -> editDistance();
+                case 6 -> displayDistanceTable();
                 case 0 -> System.out.println("Exiting City Management...");
                 default -> System.out.println("Invalid choice. Please try again.");
             }
@@ -129,8 +134,14 @@ public class AS20240979 {
 
         for (int i = index; i < cityCount - 1; i++) {
             cities[i] = cities[i + 1];
+            distance[i] = distance[i + 1];
         }
-
+        for (int i = 0; i < cityCount; i++) {
+            for (int j = index; j < cityCount - 1; j++) {
+                distance[i][j] = distance[i][j + 1];
+            }
+        }
+        
         cityCount--;
         System.out.println(cityToRemove + " has been removed successfully.");
     }
@@ -149,6 +160,71 @@ public class AS20240979 {
             System.out.println((i + 1) + ". " + cities[i]);
         }
     }
+    
+    // Distance Management
+  
+    static void editDistance() {
+        if (cityCount < 2) {
+            System.out.println("At least two cities are required!");
+            return;
+        }
+        
+        displayCities();
+        System.out.print("Enter the index of the first city: ");
+        int i = getIntInput() - 1;
+
+        System.out.print("Enter the index of the second city: ");
+        int j = getIntInput() - 1;
+
+        if (i < 0 || j < 0 || i >= cityCount || j >= cityCount) {
+            System.out.println("Invalid city index!");
+            return;
+        }
+
+        if (i == j) {
+            System.out.println("Distance from a city to itself is 0.");
+            distance[i][j] = 0;
+            return;
+        }
+
+        System.out.print("Enter the distance between " + cities[i] + " and " + cities[j] + " (in km): ");
+        int d = getIntInput();
+
+        if (d < 0) {
+            System.out.println("Distance cannot be negative!");
+            return;
+        }
+
+        distance[i][j] = d;
+        distance[j][i] = d; // make symmetrical
+
+        System.out.println("Distance updated successfully between " + cities[i] + " and " + cities[j] + ".");
+    }
+
+    static void displayDistanceTable() {
+        if (cityCount < 2) {
+            System.out.println("Not enough cities to display distances.");
+            return;
+        }
+
+        System.out.println("\n===== Distance Table (km) =====");
+
+        // Header row
+        System.out.printf("%12s", "");
+        for (int i = 0; i < cityCount; i++) {
+            System.out.printf("%12s", cities[i]);
+        }
+        System.out.println();
+
+        // Distance data
+        for (int i = 0; i < cityCount; i++) {
+            System.out.printf("%12s", cities[i]);
+            for (int j = 0; j < cityCount; j++) {
+                System.out.printf("%12d", distance[i][j]);
+            }
+            System.out.println();
+        }
+    }
 
     
     // Find city index (Helper method)
@@ -162,8 +238,6 @@ public class AS20240979 {
         return -1;
     }
 
-    
-    // Safe integer input
    
     static int getIntInput() {
         try {
@@ -172,4 +246,5 @@ public class AS20240979 {
             return -1;
         }
     }
-  }
+}
+  
