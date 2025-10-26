@@ -308,6 +308,8 @@ public class AS20240979 {
         double deliveryCost = D * R * (1 + W / 10000);
         double time = D / S;
         double fuelUsed = D / E;
+        double fuelCost = fuelUsed * F;
+        double totalCost = deliveryCost + fuelCost;
         
         
         System.out.println("\n===== DELIVERY COST ESTIMATION =====");
@@ -319,6 +321,8 @@ public class AS20240979 {
         System.out.println("--------------------------------------");
         System.out.printf("Base Delivery Cost: %.2f LKR\n", deliveryCost);
         System.out.printf("Fuel Used: %.2f L\n", fuelUsed);
+        System.out.printf("Fuel Cost: %.2f LKR\n", fuelCost);
+        System.out.printf("Total Operational Cost: %.2f LKR\n", totalCost);
         
         
         
